@@ -9,7 +9,14 @@ services:
 
     victoire_i18n.translator:
         class: Victoire\Bundle\I18nBundle\Translation\Translator
-        arguments: ["@service_container", "@translator.selector",{}, {cache_dir:"%kernel.cache_dir%/translations%", debug: "%kernel.debug%"}]
+        autowire: true
+        arguments:
+            $loaderIds: {}
+            $options:
+                cache_dir: "%kernel.cache_dir%/translations%"
+                debug: "%kernel.debug%"
+                domains: '%victoire_i18n.users_locale.domains%'
+                default_kernel_locale: '%kernel.default_locale%'
 
     victoire_i18n.locale_subscriber:
         class: Victoire\Bundle\I18nBundle\Subscriber\LocaleSubscriber
